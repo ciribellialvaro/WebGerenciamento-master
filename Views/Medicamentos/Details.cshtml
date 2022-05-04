@@ -1,0 +1,80 @@
+﻿@model WebGerenciamento.Models.Medicamentos
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Medicamentos</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Registro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Registro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Medicamento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Medicamento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Validade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Validade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Preço)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Preço)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Fabricante)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Fabricante.Nome)
+        </dd>
+
+
+        <div class="form-group">
+
+            <input asp-for="ReacoesMedicamento" type="hidden" />
+        <dt class="col-sm-2">
+            Reações
+        </dt>
+
+            @foreach (Reacoes item in ViewBag.Reacoes)
+            {
+            <div class="form-check form-switch">
+                <input disabled type="checkbox" class="form-check-input" id="@item.Id" value="@item.Id" checked="@item.Checked" onclick="CheckSelecionado('@item.Id')" />
+                <label class="form-check-label" for="@item.Id"> @item.Nome</label>
+            </div>
+            }
+
+</div>
+
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Editar</a> |
+    <a asp-action="Index">Voltar</a>
+</div>

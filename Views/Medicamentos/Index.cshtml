@@ -1,0 +1,90 @@
+﻿@model IEnumerable<WebGerenciamento.Models.Medicamentos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Medicamentos</h1>
+
+<p>
+    <a asp-action="Create">Adicionar</a>
+</p>
+
+
+@using (Html.BeginForm())
+{
+    <div style="display:flex; justify-content:space-evenly; align-items:flex-end">
+        <div class="col-md-6">
+            <label class="control-label">Pesquisar:</label>
+            <input id="filtro" name="filtro"  class="form-control" />
+        </div>
+
+         <div class="col-md-3">
+             <input type="submit" class="btn-primary btn-lg"  value="Procurar" />
+        </div>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Registro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Medicamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Validade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preço)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fabricante)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Registro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Medicamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Validade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Preço)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fabricante.Nome)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

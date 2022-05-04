@@ -1,0 +1,79 @@
+﻿@model WebGerenciamento.Models.Medicamentos
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Medicamentos</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Registro" class="control-label"></label>
+                <input asp-for="Registro" data-mask='0.0000.0000.000-0' class="form-control" />
+                <span asp-validation-for="Registro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Medicamento" class="control-label"></label>
+                <input asp-for="Medicamento" class="form-control" />
+                <span asp-validation-for="Medicamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Validade" class="control-label"></label>
+                <input asp-for="Validade" type="date" class="form-control" />
+                <span asp-validation-for="Validade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone" class="control-label"></label>
+                <input asp-for="Telefone" data-mask='(00)0000-0000' class="form-control" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preço" class="control-label"></label>
+                <input asp-for="Preço" data-mask='#.##0,00' class="form-control" />
+                <span asp-validation-for="Preço" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantidade" class="control-label"></label>
+                <input asp-for="Quantidade" class="form-control" />
+                <span asp-validation-for="Quantidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdFabricante" class="control-label"></label>
+                <select asp-for="IdFabricante" class="form-control" asp-items="ViewBag.IdFabricante"></select>
+            </div>
+
+            <div class="form-group">
+
+                <input asp-for="ReacoesMedicamento" type="hidden" />
+                <label class="control-label"> Reações</label>
+
+                @foreach (Reacoes item in ViewBag.Reacoes)
+                {
+                    <div class="form-check form-switch">
+                        <input type="checkbox" class="form-check-input" id="@item.Id" value="@item.Id" checked="@item.Checked" onclick="CheckSelecionado('@item.Id')" />
+                        <label class="form-check-label" for="@item.Id"> @item.Nome</label>
+                    </div>
+                }
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Adicionar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
